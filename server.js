@@ -4,21 +4,19 @@ import cors from "cors";
 import dotenv from "dotenv";
 import userRoutes from "./route/route.userroute.js";
 import bookRoutes from "./route/booking.routes.js";
-
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
-
-// Allow CORS for a specific origin
 app.use(cors({ origin: "https://sakthibackend-rhza.vercel.app" }));
+
 
 app.get("/", (req, res) => {
   res.send("MERN Backend Running with Import Syntax!");
 });
 
-// User Routes
+// Use User Routes
 app.use("/api/users", userRoutes);
 app.use("/api/users/book", bookRoutes);
 
