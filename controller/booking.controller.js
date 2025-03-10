@@ -1,8 +1,15 @@
 import Booking from "../models/booking.model.js";
+import nodemailer from "nodemailer";
 
-/**
- * Create a new booking
- */
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "sakthivelv202222@gmail.com", // Replace with the website owner's email
+    pass: "vjrriqtisknjfucn",  // Replace with your app password if using Gmail
+  },
+});
+
 export const createBooking = async (req, res) => {
   try {
     const { userId, from, date, destination, phone, members } = req.body;
@@ -16,11 +23,37 @@ export const createBooking = async (req, res) => {
     const newBooking = new Booking({ userId, from, date, destination, phone, members });
     await newBooking.save();
 
+    // Email content
+    const mailOptions = {
+      from: "sakthivelv202222@gmail.com", // Sender email
+      to: "727823tucs256@skct.edu.in", // Website owner's email
+      subject: "New Booking Received",
+      text: `A new booking has been made with the following details:\n\n
+        Booking ID: ${newBooking._id}\n
+        User ID: ${newBooking.userId}\n
+        From: ${newBooking.from}\n
+        Date: ${newBooking.date}\n
+        Destination: ${newBooking.destination}\n
+        Phone: ${newBooking.phone}\n
+        Members: ${newBooking.members}\n\n
+        Please check the admin panel for more details.`,
+    };
+
+    // Send email
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error("Email not sent:", error);
+      } else {
+        console.log("Email sent:", info.response);
+      }
+    });
+
     res.status(201).json({ success: true, message: "Booking successful", booking: newBooking });
   } catch (error) {
     res.status(500).json({ success: false, message: "Server error", error: error.message });
   }
 };
+
 
 /**
  * Get all bookings for a user
