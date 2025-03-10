@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors({ origin: "https://sakthibackend-rhza.vercel.app" }));
+app.use(cors({ origin: "https://sivanethunaitoursandtravels.vercel.app" }));
 
 
 app.get("/", (req, res) => {
