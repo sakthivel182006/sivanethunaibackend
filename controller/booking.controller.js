@@ -5,8 +5,8 @@ import nodemailer from "nodemailer";
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "sakthivelv202222@gmail.com", // Replace with the website owner's email
-    pass: "vjrriqtisknjfucn",  // Replace with your app password if using Gmail
+    user: "sakthivelv202222@gmail.com",
+    pass: "vjrriqtisknjfucn",
   },
 });
 
@@ -14,19 +14,17 @@ export const createBooking = async (req, res) => {
   try {
     const { userId, from, date, destination, phone, members } = req.body;
 
-    // Validate required fields
     if (!userId || !from || !date || !destination || !phone || !members) {
       return res.status(400).json({ success: false, message: "All fields are required" });
     }
 
-    // Create a new booking
+   
     const newBooking = new Booking({ userId, from, date, destination, phone, members });
     await newBooking.save();
 
-    // Email content
     const mailOptions = {
-      from: "sakthivelv202222@gmail.com", // Sender email
-      to: "727823tucs256@skct.edu.in", // Website owner's email
+      from: "sakthivelv202222@gmail.com", 
+      to: "kumarsram21813@gmail.com",
       subject: "New Booking Received",
       text: `A new booking has been made with the following details:\n\n
         Booking ID: ${newBooking._id}\n
@@ -39,7 +37,6 @@ export const createBooking = async (req, res) => {
         Please check the admin panel for more details.`,
     };
 
-    // Send email
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error("Email not sent:", error);
