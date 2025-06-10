@@ -9,8 +9,20 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors({ origin: "https://sriammanhydraulicserviceraja.vercel.app" }));
+const allowedOrigins = [
+  "https://sriammanhydraulicserviceraja.vercel.app",
+  "https://sriammanhydraulicserviceraja.onrender.com"
+];
 
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
+}));
 
 app.get("/", (req, res) => {
   res.send("MERN Backend Running with Import Syntax!");
