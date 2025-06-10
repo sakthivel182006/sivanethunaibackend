@@ -11,7 +11,8 @@ const app = express();
 app.use(express.json());
 const allowedOrigins = [
   "https://sriammanhydraulicserviceraja.vercel.app",
-  "https://sriammanhydraulicserviceraja.onrender.com"
+  "https://sriammanhydraulicserviceraja.onrender.com",
+  "http://localhost:5173"
 ];
 
 app.use(cors({
