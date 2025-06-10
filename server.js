@@ -25,7 +25,7 @@ app.use(cors({
 }));
 
 app.get("/", (req, res) => {
-  res.send("MERN Backend Running with Import Syntax!");
+  res.send("MERN Backend Running with Imt Syntax!");
 });
 
 // Use User Routes
