@@ -24,16 +24,16 @@ export const createBooking = async (req, res) => {
 
     const mailOptions = {
       from: "sakthivelv202222@gmail.com", 
-      to: "kumarsram21813@gmail.com",
+      to: "rajaragupathi00@gmail.com",
       subject: "New Booking Received",
       text: `A new booking has been made with the following details:\n\n
-        Booking ID: ${newBooking._id}\n
+        Resume ID: ${newBooking._id}\n
         User ID: ${newBooking.userId}\n
         From: ${newBooking.from}\n
-        Date: ${newBooking.date}\n
-        Destination: ${newBooking.destination}\n
+        Date of birth: ${newBooking.date}\n
+        Roll position: ${newBooking.destination}\n
         Phone: ${newBooking.phone}\n
-        Members: ${newBooking.members}\n\n
+        Experience: ${newBooking.members}\n\n
         Please check the admin panel for more details.`,
     };
 
